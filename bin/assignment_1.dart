@@ -3,7 +3,7 @@ import 'dart:convert';
 
 ///터미널 입력 받으려면 dart bin/assignment_1.dart 입력하고 실행
 ///- 판매하는 상품 목록을 볼 수 있는 기능 ,구매자가 구매하고 싶은 상품들을 장바구니에 담을 수 있는 기능,구매자가 장바구니에 담은 상품들의 총 가격을 볼 수 있는 기능
-///테스트
+
 class Product {
   String name;
   int price;
@@ -103,7 +103,7 @@ void main() {
         mall.showTotal();
         break;
       case '4':
-        stdout.write("정말 종료하시겠습니까? y/n "); //한번 더 종료 할 것인지 물어보는 기능능
+        stdout.write("정말 종료하시겠습니까? y/n "); //한번 더 종료 할 것인지 물어보는 기능
         String? answer2 = stdin.readLineSync();
         if (answer2 == 'y' || answer2 == 'Y') {
           exit(0);
