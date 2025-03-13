@@ -59,24 +59,27 @@ class ShoppingMall {
     } else if (quantity > 0) {
       print("$quantity개 상품이 장바구니에 담겼어요!");
       for (int i = 0; i < quantity; i++) {
-        cart.add(target.first);
+        cart.add(target.first); //target[0]에 추가 하겠다.
       }
     } else {
       print("입력값이 올바르지 않아요.");
     }
   }
 
-  //장바구니에 담은 상품의 총 가격을 출력하는 메서드드
+  //장바구니에 담은 상품의 총 가격을 출력하는 메서드
   void showTotal() {
     if (cart.isEmpty) {
       print("장바구니가 비어 있습니다. 먼저 상품을 추가해 주세요!");
       return;
     }
+    String totalProduct = cart
+        .map((product) => product.name)
+        .join(", "); //장바구니에 담은 상품명 보여주기기
 
     int totalPrice = cart.fold(0, (a, b) => a + b.price);
     //list.fold(초기값, (누적적 값, 현재 요소) => 새로운 값) fold는 초기값 설정에 따라 타입이 정해진다. reduce는 리스트 타입에 의해 반환타입결정된다.
 
-    print("총 가격은 ${totalPrice}원 입니다!");
+    print("장바구니에 ${totalProduct}가 담겨 있네요. 총 가격은 ${totalPrice}원 입니다!");
   }
 }
 
@@ -84,7 +87,7 @@ void main() {
   ShoppingMall mall = ShoppingMall();
   while (true) {
     stdout.write(
-      "[1] 상품 목록 보기 / [2] 장바구니에 담기 / [3] 장바구니에 담긴 상품의 총 가격 보기 / [4] 프로그램 종료 ",
+      "[1] 상품 목록 보기 / [2] 장바구니에 담기 / [3] 장바구니에 담긴 상품의 총 가격 보기 / [4] 프로그램 종료 / [6] 장바구니 초기화 ",
     );
     String? answer = stdin.readLineSync();
     print(answer);
@@ -100,9 +103,22 @@ void main() {
         mall.showTotal();
         break;
       case '4':
-        print("이용해 주셔서 감사합니다 ~ 안녕히 가세요 !");
-        exit(0);
-
+        stdout.write("정말 종료하시겠습니까? y/n ");
+        String? answer2 = stdin.readLineSync();
+        if (answer2 == 'y' || answer2 == 'Y') {
+          exit(0);
+        } else {
+          print("종료하지 않습니다.");
+        }
+        break;
+      case '6':
+        if (mall.cart.isEmpty) {
+          print("이미 장바구니가 비어있습니다.");
+        } else {
+          mall.cart.clear();
+          print("장바구니를 초기화 합니다.");
+        }
+        break;
       default:
         print('지원하지 않는 기능입니다 ! 다시 시도해 주세요 ..');
     }
