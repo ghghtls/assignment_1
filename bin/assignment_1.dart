@@ -74,7 +74,7 @@ class ShoppingMall {
     }
     String totalProduct = cart
         .map((product) => product.name)
-        .join(", "); //장바구니에 담은 상품명 보여주기기
+        .join(", "); //장바구니에 담은 상품명 보여주기
 
     int totalPrice = cart.fold(0, (a, b) => a + b.price);
     //list.fold(초기값, (누적적 값, 현재 요소) => 새로운 값) fold는 초기값 설정에 따라 타입이 정해진다. reduce는 리스트 타입에 의해 반환타입결정된다.
@@ -103,7 +103,7 @@ void main() {
         mall.showTotal();
         break;
       case '4':
-        stdout.write("정말 종료하시겠습니까? y/n ");
+        stdout.write("정말 종료하시겠습니까? y/n "); //한번 더 종료 할 것인지 물어보는 기능능
         String? answer2 = stdin.readLineSync();
         if (answer2 == 'y' || answer2 == 'Y') {
           exit(0);
@@ -113,6 +113,7 @@ void main() {
         break;
       case '6':
         if (mall.cart.isEmpty) {
+          //장바구니 초기화
           print("이미 장바구니가 비어있습니다.");
         } else {
           mall.cart.clear();
